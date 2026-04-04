@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VarientX Demo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">DevBytes Backend Assignment</p>
+        <h1>VarientX</h1>
+        <p class="lede">
+          Reviewer-friendly demo for a backend-controlled A/B experimentation
+          service.
+        </p>
+      </section>
+
+      <section class="panel">
+        <form id="assignment-form" class="form">
+          <label for="user-id">User ID</label>
+          <div class="row">
+            <input
+              id="user-id"
+              name="user-id"
+              type="text"
+              placeholder="Enter a user id, for example 42"
+              required
+            />
+            <button type="submit">Fetch Assignment</button>
+          </div>
+          <label class="checkbox">
+            <input id="debug" type="checkbox" />
+            Include debug metadata
+          </label>
+        </form>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Assignment Summary</h2>
+          <dl id="summary" class="summary">
+            <div>
+              <dt>Experiment</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Variant</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Bucket</dt>
+              <dd>-</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h2>Variant Config</h2>
+          <pre id="config-output">Submit a user ID to view config.</pre>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Raw Response</h2>
+        <pre id="raw-output">Waiting for request...</pre>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
