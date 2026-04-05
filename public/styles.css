@@ -1,14 +1,15 @@
 :root {
-  color-scheme: light;
-  --bg: #f7f1e8;
-  --ink: #1f1d1a;
-  --muted: #5d564d;
-  --card: rgba(255, 252, 247, 0.82);
-  --line: rgba(31, 29, 26, 0.08);
-  --accent: #c4572e;
-  --accent-dark: #8f3413;
-  --accent-soft: #f4d6c7;
-  --shadow: 0 20px 50px rgba(60, 41, 17, 0.12);
+  color-scheme: dark;
+  --bg: #060816;
+  --bg-soft: #0b1025;
+  --ink: #eef2ff;
+  --muted: #98a3c7;
+  --card: rgba(9, 14, 34, 0.72);
+  --line: rgba(130, 149, 255, 0.15);
+  --accent: #7c5cff;
+  --accent-strong: #4e7dff;
+  --accent-soft: rgba(124, 92, 255, 0.18);
+  --shadow: 0 28px 90px rgba(3, 7, 18, 0.55);
 }
 
 * {
@@ -17,13 +18,16 @@
 
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Instrument Sans", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(196, 87, 46, 0.22), transparent 28%),
-    radial-gradient(circle at top right, rgba(31, 29, 26, 0.08), transparent 22%),
-    linear-gradient(160deg, #fbf7f2 0%, var(--bg) 100%);
+    radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.24), transparent 24%),
+    radial-gradient(circle at 85% 12%, rgba(78, 125, 255, 0.22), transparent 22%),
+    radial-gradient(circle at 50% 90%, rgba(15, 183, 255, 0.12), transparent 28%),
+    linear-gradient(160deg, #040611 0%, var(--bg) 48%, var(--bg-soft) 100%);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .shell {
@@ -33,13 +37,17 @@ body {
 }
 
 .hero {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 24px;
+  align-items: center;
   margin-bottom: 28px;
 }
 
 .eyebrow {
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-dark);
+  color: #bcc8ff;
   font-size: 0.78rem;
   margin-bottom: 12px;
 }
@@ -48,11 +56,13 @@ h1,
 h2 {
   margin: 0;
   font-weight: 600;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 h1 {
   font-size: clamp(2.8rem, 8vw, 5rem);
-  line-height: 0.95;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
 }
 
 h2 {
@@ -65,6 +75,52 @@ h2 {
   font-size: 1.08rem;
   color: var(--muted);
   margin-top: 14px;
+  line-height: 1.7;
+}
+
+.hero-orb {
+  position: relative;
+  aspect-ratio: 1;
+  min-height: 240px;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at center, rgba(124, 92, 255, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(17, 22, 46, 0.9), rgba(7, 10, 25, 0.85));
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.orb-core,
+.orb-ring {
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+}
+
+.orb-core {
+  width: 110px;
+  height: 110px;
+  background:
+    radial-gradient(circle at 35% 35%, #e9edff 0%, #7c5cff 34%, #3460ff 72%, #101a44 100%);
+  box-shadow:
+    0 0 48px rgba(124, 92, 255, 0.5),
+    0 0 90px rgba(52, 96, 255, 0.28);
+}
+
+.orb-ring {
+  border: 1px solid rgba(197, 210, 255, 0.16);
+}
+
+.orb-ring-one {
+  width: 180px;
+  height: 180px;
+}
+
+.orb-ring-two {
+  width: 270px;
+  height: 270px;
 }
 
 .panel,
@@ -85,6 +141,7 @@ h2 {
   display: block;
   margin-bottom: 10px;
   font-size: 0.95rem;
+  color: #dce3ff;
 }
 
 .row {
@@ -95,11 +152,20 @@ h2 {
 
 input[type="text"] {
   width: 100%;
-  border: 1px solid rgba(31, 29, 26, 0.14);
+  border: 1px solid rgba(135, 155, 255, 0.18);
   border-radius: 14px;
   padding: 14px 16px;
   font: inherit;
-  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  background: rgba(8, 14, 33, 0.9);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+input[type="text"]:focus {
+  border-color: rgba(124, 92, 255, 0.7);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.14);
+  transform: translateY(-1px);
 }
 
 button {
@@ -108,12 +174,16 @@ button {
   padding: 14px 18px;
   font: inherit;
   color: white;
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 18px 40px rgba(78, 125, 255, 0.28);
   cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease, box-shadow 160ms ease;
 }
 
 button:hover {
-  filter: brightness(1.04);
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 24px 48px rgba(78, 125, 255, 0.34);
 }
 
 .checkbox {
@@ -156,6 +226,7 @@ dt {
 dd {
   margin: 0;
   font-weight: 600;
+  color: #eff3ff;
 }
 
 pre {
@@ -163,8 +234,9 @@ pre {
   padding: 16px;
   border-radius: 16px;
   overflow: auto;
-  background: #1f1d1a;
-  color: #f6efe6;
+  background: rgba(4, 8, 20, 0.92);
+  color: #d9e2ff;
+  border: 1px solid rgba(130, 149, 255, 0.12);
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -175,9 +247,14 @@ pre {
     padding-top: 28px;
   }
 
+  .hero,
   .row,
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero-orb {
+    min-height: 220px;
   }
 
   button {
