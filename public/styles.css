@@ -150,6 +150,13 @@ h2 {
   gap: 12px;
 }
 
+.input-error {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: #ff8ca8;
+  font-size: 0.92rem;
+}
+
 input[type="text"] {
   width: 100%;
   border: 1px solid rgba(135, 155, 255, 0.18);
@@ -166,6 +173,11 @@ input[type="text"]:focus {
   border-color: rgba(124, 92, 255, 0.7);
   box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.14);
   transform: translateY(-1px);
+}
+
+input[aria-invalid="true"] {
+  border-color: rgba(255, 140, 168, 0.78);
+  box-shadow: 0 0 0 4px rgba(255, 140, 168, 0.12);
 }
 
 button {

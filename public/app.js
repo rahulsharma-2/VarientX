@@ -4,6 +4,14 @@ const debugCheckbox = document.querySelector("#debug");
 const summary = document.querySelector("#summary");
 const configOutput = document.querySelector("#config-output");
 const rawOutput = document.querySelector("#raw-output");
+const inputError = document.querySelector("#input-error");
+
+const integerUserIdPattern = /^\d+$/;
+
+const setInputError = (message = "") => {
+  inputError.textContent = message;
+  userIdInput.setAttribute("aria-invalid", message ? "true" : "false");
+};
 
 const updateSummary = (payload) => {
   const pairs = [
@@ -17,14 +25,38 @@ const updateSummary = (payload) => {
   });
 };
 
+userIdInput.addEventListener("input", () => {
+  const digitsOnlyValue = userIdInput.value.replace(/[^\d]/g, "");
+
+  if (userIdInput.value !== digitsOnlyValue) {
+    userIdInput.value = digitsOnlyValue;
+  }
+
+  if (digitsOnlyValue) {
+    setInputError("");
+  }
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const userId = userIdInput.value.trim();
   if (!userId) {
+    setInputError("User ID is assumed to be numeric only. Please enter a valid number.");
     rawOutput.textContent = "Please provide a user ID.";
+    configOutput.textContent = "No config available.";
     return;
   }
+
+  if (!integerUserIdPattern.test(userId)) {
+    setInputError("User ID is assumed to be numeric only. Please enter a valid number.");
+    rawOutput.textContent =
+      "User ID is assumed to be numeric only. Please enter a valid number.";
+    configOutput.textContent = "No config available.";
+    return;
+  }
+
+  setInputError("");
 
   const query = new URLSearchParams({ user_id: userId });
   if (debugCheckbox.checked) {

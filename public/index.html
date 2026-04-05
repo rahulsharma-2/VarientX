@@ -38,11 +38,15 @@
               id="user-id"
               name="user-id"
               type="text"
+              inputmode="numeric"
+              pattern="[0-9]+"
+              autocomplete="off"
               placeholder="Enter a user id, for example 42"
               required
             />
             <button type="submit">Fetch Assignment</button>
           </div>
+          <p id="input-error" class="input-error" aria-live="polite"></p>
           <label class="checkbox">
             <input id="debug" type="checkbox" />
             Include debug metadata

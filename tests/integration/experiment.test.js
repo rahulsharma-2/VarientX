@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { getExperiment } from "../../src/controllers/experiment.controller.js";
+import { validateExperimentQuery } from "../../src/middleware/experiment-validation.middleware.js";
 
 test("GET /experiment returns a stable assignment payload", async (t) => {
   const createMocks = () => {
@@ -80,4 +81,25 @@ test("GET /experiment rejects a missing user_id", async () => {
   assert.ok(nextError);
   assert.equal(nextError.statusCode, 400);
   assert.equal(nextError.message, "Query parameter 'user_id' is required.");
+});
+
+test("validateExperimentQuery rejects a non-numeric user_id", async () => {
+  const req = {
+    query: {
+      user_id: "abc42"
+    }
+  };
+
+  let nextError = null;
+
+  validateExperimentQuery(req, {}, (error) => {
+    nextError = error ?? null;
+  });
+
+  assert.ok(nextError);
+  assert.equal(nextError.statusCode, 400);
+  assert.equal(
+    nextError.message,
+    "Query parameter 'user_id' is assumed to be numeric only. Please enter a valid number."
+  );
 });
