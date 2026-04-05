@@ -1,6 +1,5 @@
 # Assumptions
 
-- The assignment only requires one of the provided problem statements, and this submission implements Option 1.
 - The core requirement is deterministic assignment for a given `user_id`, not a full-featured experimentation platform.
 - A single active experiment is sufficient for the submission as long as the code is structured to extend cleanly.
 - Returning frontend-facing config payloads per variant is desirable because the prompt mentions serving experiment configurations to frontend clients.

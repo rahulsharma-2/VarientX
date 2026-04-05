@@ -12,7 +12,7 @@ Backend-controlled A/B experimentation system built with Node.js and Express for
 
 ## Problem Summary
 
-This project implements the assignment's Option 1: a backend-driven experimentation service that exposes:
+This project implements the assignment's a backend-driven A/B experimentation system that deterministically assigns users to variants and serves experiment configurations to frontend clients.
 
 `GET /experiment?user_id=<id>`
 
@@ -137,15 +137,6 @@ The page lets a reviewer:
 - Experiment definitions are local config rather than database-backed.
   - Benefit: faster local setup and cleaner reviewer experience.
   - Cost: non-technical operators cannot modify experiments dynamically.
-
-## What An Interviewer Is Likely Evaluating
-
-- whether bucketing logic is truly deterministic
-- whether the backend owns assignment instead of the UI
-- whether the response contract is clean and usable by a frontend
-- whether edge cases and failure modes are handled deliberately
-- whether the candidate can choose an appropriately scoped architecture
-- whether docs and local setup make the project easy to review
 
 ## Local Run
 
